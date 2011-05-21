@@ -1,0 +1,21 @@
+<plugin name='unshorten' version='1.0.2' grailsVersion='1.1 &gt; *'>
+  <author>Jonathan Griggs</author>
+  <authorEmail>twitcaps.developer@gmail.com</authorEmail>
+  <title>Unshorten provides the ability to expand shortened HTTP links to their full, original size without the use of a third-party API</title>
+  <description>\
+Provides an UnshortenService to expand links that have been shortened by any redirecting Link Shortener (ex. T.Co, Bit.ly, TinyURL). 
+Backed by a LRU Cache of Expanded Links with a configurable maximum size for optimal performance
+</description>
+  <documentation>http://grails.org/plugin/unshorten</documentation>
+  <resources>
+    <resource>BuildConfig</resource>
+    <resource>Config</resource>
+    <resource>DataSource</resource>
+    <resource>UrlMappings</resource>
+    <resource>com.memetix.unshorten.UnshortenController</resource>
+    <resource>com.memetix.unshorten.UnshortenService</resource>
+    <resource>com.memetix.unshorten.UnshortenTagLib</resource>
+  </resources>
+  <dependencies />
+  <behavior />
+</plugin>
