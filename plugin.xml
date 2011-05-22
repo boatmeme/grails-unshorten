@@ -1,4 +1,4 @@
-<plugin name='unshorten' version='1.0.2' grailsVersion='1.1 &gt; *'>
+<plugin name='unshorten' version='1.0.3' grailsVersion='1.1 &gt; *'>
   <author>Jonathan Griggs</author>
   <authorEmail>twitcaps.developer@gmail.com</authorEmail>
   <title>Unshorten provides the ability to expand shortened HTTP links to their full, original size without the use of a third-party API</title>
