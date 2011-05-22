@@ -1,0 +1,9 @@
+/test/projects/unshortenapp
+
+This directory contains a Grails App meant for testing the grails-unshorten plugin. It is configured to reference the plugin code inline at ../../..
+
+This means you can alter the plugin code and test it in a client without the need to "package-plugin" and reinstall the zip file
+
+You still may need to restart the app after making changes to the plugin, but it is a bit more convenient. 
+
+At the index of the app, there is an Ajax form for testing the plugin API
