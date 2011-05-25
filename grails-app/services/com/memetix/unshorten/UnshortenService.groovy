@@ -32,7 +32,7 @@ class UnshortenService {
     static urlRegex = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])/
     def maxCacheSize = ConfigurationHolder?.config?.unshorten?.cache?.maxSize ?: 10000
     def connectTimeoutInMilliseconds = ConfigurationHolder?.config?.unshorten?.http?.connectTimeout ?: 1000
-    def readTimeoutInMilliseconds = ConfigurationHolder?.config?.unshorten?.http?.readtimeout ?: 1000
+    def readTimeoutInMilliseconds = ConfigurationHolder?.config?.unshorten?.http?.readTimeout ?: 1000
     def cache = new LRUCache(maxCacheSize)
     static scope = "singleton"
     
