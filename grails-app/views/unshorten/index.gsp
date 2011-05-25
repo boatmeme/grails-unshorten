@@ -17,6 +17,7 @@
             padding:10px;
             background-color: #FBFCD0;
             width:600px;
+            border:5px solid #EECD7E;
         }
         #title {
           color: #666666;
@@ -40,17 +41,16 @@
           margin:10px;
         }
         #submit:hover {
-          background-color: #666666;
+          background-color: #EECD7E;
           color:white;
         }
         #unshortened {
-          background-color: #FFC2CE;
-          border: 4px solid #80B3FF;
+          background-color: #FFF3A1;
+          border: 4px solid #EECD7E;
           font-family: Tahoma, Geneva, sans-serif;
           font-size:1.2em;
           padding: 5px;
           margin: 10px;
-          width: 500px;
         }
         #unshortened p {
           margin:5px;
@@ -58,8 +58,9 @@
     </style>
   </head>
   <body>
+    <g:set var="pluginManager" value="${applicationContext.getBean('pluginManager')}"></g:set>
     <div id="container">
-      <div id="title">grails-unshorten Plugin</div>
+      <div id="title">grails-unshorten v<a href="https://github.com/boatmeme/grails-unshorten/tree/v${pluginManager?.getGrailsPlugin('unshorten')?.version}">${pluginManager?.getGrailsPlugin('unshorten')?.version}</a></div>
         <g:form method="post">
           <input type="text" id="shortUrl" name="shortUrl"/>
           <input type="Submit" id="submit" value="Unshorten"/>
