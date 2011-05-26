@@ -205,8 +205,8 @@ _Returns_
 
 * a String - the block of text with all URLs replaced by their Unshortened counterparts
 
-            def shortUrl = "Check out these links! http://bit.ly/jkD0Qr and http://minu.me/4fmw"
-            unshortenService?.unshorten(shortUrl)
+            def textBlock = "Check out these links! http://bit.ly/jkD0Qr and http://minu.me/4fmw"
+            unshortenService?.expandUrlsInText(textBlock)
 
 _returns_
 
