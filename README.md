@@ -27,14 +27,17 @@ The UnshortenPlugin may be configured with several parameters, all specified in 
     unshorten.cache.maxSize        = 10000   // Default 10000
     unshorten.http.connectTimeout  = 1000    // in millis, default 1000
     unshorten.http.readTimeout     = 1000    // in millis, default 1000
+    unshorten.ajax.forward.html    = [controller:'myController', action:'myHtmlAction']
+    unshorten.ajax.forward.json    = [controller:'myController', action:'myJsonAction']
+    unshorten.ajax.forward.xml     = [controller:'myController', action:'myXmlAction']
 
-
+***
 ### unshorten.cache.maxSize
 
 This is the maximum number of Unshortened URLs that will be stored in the LRU Cache at any given time. When this number is exceeded, the Least-Recently-Used entry in the Cache will be evicted.
 
 _Defaults to 10000 entries_
-
+***
 ### unshorten.http.connectTimeout
 
 A java.net.URLConnection is used to perform the unshorten functionality of the plugin.
@@ -46,7 +49,7 @@ It sets the [connectionTimeout](http://download.oracle.com/javase/6/docs/api/jav
 _Defaults to 1000 milliseconds_
 
 >_If you're returning many Unshortened urls with a status of 'TIMED\_OUT' you may try increasing this setting_
-
+***
 ### unshorten.http.readTimeout
 
 A java.net.URLConnection is used to perform the unshorten functionality of the plugin.
@@ -58,7 +61,65 @@ It sets the [readTimeout](http://download.oracle.com/javase/6/docs/api/java/net/
 _Defaults to 1000 milliseconds_
 
 >_If you're returning many Unshortened urls with a status of 'TIMED\_OUT' you may try increasing this setting_
+***
+### unshorten.ajax.forward.html 
+Optional map containing an `action` and `controller` to forward an AJAX request after the plugin's `/unshorten/ajax?format=html` action has finished processing. 
 
+Setting this property allows you to override the default HTML display. You will receive a java.util.Map assigned to the `request.unshortenResponse` variable to the response containing the data you may use in the response.
+
+Example action in your own MyCustomController.groovy:
+
+    def ajaxHtmlTemplate = {
+        def results = request.unshortenResponse
+
+        for(e in results.data)
+            e.enrichedData = "ENRICHED_FOR_HTML"
+
+        [unshortenResponse: results]
+    }
+
+***
+### unshorten.ajax.forward.json
+Optional map containing an `action` and `controller` to forward an AJAX request after the plugin's `/unshorten/ajax?format=json` action has finished processing. 
+
+Setting this property allows you to augment/enrich the JSON data before it is returned to the caller in the response. 
+
+You will receive a String assigned to the `request.unshortenResponse` variable containing the JSON data you may use in the response. If you wish to work with it as JSON, you must parse it first. 
+
+Example action in your own MyCustomController.groovy:
+
+    def ajaxJsonTemplate = {
+        def results = JSON.parse(request.unshortenResponse)
+        
+        for(e in results.data)
+            e.enrichedData = "ENRICHED_FOR_JSON"
+        
+        render results as JSON
+    }
+
+*** 
+### unshorten.ajax.forward.xml
+Optional map containing an `action` and `controller` to forward an AJAX request after the plugin's `/unshorten/ajax?format=xml` action has finished processing. 
+
+Setting this property allows you to augment/enrich the XML data before it is returned to the caller in the response. 
+
+You will receive a String assigned to the `request.unshortenResponse` variable containing the XML data you may use in the response. If you wish to work with it as XML, you must parse it first. 
+
+Example action in your own MyCustomController.groovy:
+
+    def ajaxXmlTemplate = {
+        def results = new XmlParser().parseText(request.unshortenResponse)
+
+        results.data.entry.each { e ->
+            e.appendNode("enrrichedData","ENRICHED_FOR_XML")
+        }
+        
+        def writer = new StringWriter()
+        new XmlNodePrinter(new PrintWriter(writer)).print(results)
+        def result = writer.toString()
+        
+        render(text: result, contentType:"text/xml", encoding:"UTF-8")
+    }
 # UnshortenService
 
 ## Services
