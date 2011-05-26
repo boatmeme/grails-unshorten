@@ -37,6 +37,7 @@ The UnshortenPlugin may be configured with several parameters, all specified in 
 This is the maximum number of Unshortened URLs that will be stored in the LRU Cache at any given time. When this number is exceeded, the Least-Recently-Used entry in the Cache will be evicted.
 
 _Defaults to 10000 entries_
+
 ***
 ### unshorten.http.connectTimeout
 
@@ -49,6 +50,7 @@ It sets the [connectionTimeout](http://download.oracle.com/javase/6/docs/api/jav
 _Defaults to 1000 milliseconds_
 
 >_If you're returning many Unshortened urls with a status of 'TIMED\_OUT' you may try increasing this setting_
+
 ***
 ### unshorten.http.readTimeout
 
@@ -61,6 +63,7 @@ It sets the [readTimeout](http://download.oracle.com/javase/6/docs/api/java/net/
 _Defaults to 1000 milliseconds_
 
 >_If you're returning many Unshortened urls with a status of 'TIMED\_OUT' you may try increasing this setting_
+
 ***
 ### unshorten.ajax.forward.html 
 Optional map containing an `action` and `controller` to forward an AJAX request after the plugin's `/unshorten/ajax?format=html` action has finished processing. 
