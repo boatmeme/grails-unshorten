@@ -1,4 +1,3 @@
-
 # Unshorten - URL Expander Plugin for Grails
 
 ## Description
@@ -423,7 +422,7 @@ Feel free to contact me by email (jonathan.griggs at gmail.com) or follow me on 
 ## v1.0.4 - 2011.05.26
 
 * `unshorten.http.readTimeout` property was incorrectly named
-* Cosmetic changes on the test view, `app_context/translate``
+* Cosmetic changes on the test view, `app_context/unshorten`
 
 ## v1.0.3 - 2011.05.22
 
