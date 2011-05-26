@@ -1,4 +1,3 @@
-
 # Unshorten - URL Expander Plugin for Grails
 
 
@@ -126,6 +125,7 @@ Example action in your own MyCustomController.groovy:
 # UnshortenService
 
 ## Services
+
 ***
 ### unshorten()
 
@@ -205,8 +205,8 @@ _Returns_
 
 * a String - the block of text with all URLs replaced by their Unshortened counterparts
 
-    def shortUrl = "Check out these links! http://bit.ly/jkD0Qr and http://minu.me/4fmw"
-    unshortenService?.unshorten(shortUrl)
+            def shortUrl = "Check out these links! http://bit.ly/jkD0Qr and http://minu.me/4fmw"
+            unshortenService?.unshorten(shortUrl)
 
 _returns_
 
