@@ -1,3 +1,4 @@
+
 # Unshorten - URL Expander Plugin for Grails
 
 
@@ -60,39 +61,41 @@ _Defaults to 1000 milliseconds_
 
 ## UnshortenService
 
-*unshorten()*
+**unshorten()**
 
 Takes a single String and returns a Map representing the Unshortened URL and ancillary data regarding its HTTP and caching statuses
 
-The values in the returnMap are as follows:
+The values in the `returnMap` are as follows:
 
-* returnMap.shortUrl = the original URL
-* returnMap.fullUrl = the unshortened URL
-* returnMap.cached = A boolean that is true if the shortenUrl was retrieved from the cache, and false if HTTP rigamarole was required
-* returnMap.status = A String, the state of the URL and one of the following possible values:
-                              ** UNSHORTENED - successfully unshortened
-                              ** NOT_SHORTENED - URL was already expanded, i.e. no redirect required
-                              ** REDIRECTED - URL was redirected internal to the TLD of the original URL
-                              ** NOT_FOUND - No document at this URL, returned 404 Error
-                              ** TIMED_OUT - Destination server or Shortener API did not respond within the timeouts specified by Config.groovy
-                              ** INVALID - Poorly formed, or non-existent URL
-                              ** UNKNOWN - Something else happened
+* **returnMap.shortUrl** = the original URL
+* **returnMap.fullUrl** = the unshortened URL
+* **returnMap.cached** = A boolean that is true if the shortenUrl was retrieved from the cache, and false if HTTP rigamarole was required
+* **returnMap.status** = A String, the state of the URL and one of the following possible values:
+     * `UNSHORTENED` - successfully unshortened
+     * `NOT_SHORTENED` - URL was already expanded, i.e. no redirect required
+     * `REDIRECTED` - URL was redirected internal to the TLD of the original URL
+     * `NOT_FOUND` - No document at this URL, returned 404 Error
+     * `TIMED_OUT` - Destination server or Shortener API did not respond within the timeouts specified by Config.groovy
+     * `INVALID` - Poorly formed, or non-existent URL
+     * `UNKNOWN` - Something else happened
 
-{note}A URL that has TIMED_OUT is not cached, the reason being that sometimes Shortening services may be temporarily unavailable now, but responsive next time we try. Considering addressing configuration of this behavior in future releases.{note}
+> _**Note**_: A URL that has TIMED_OUT is not cached, the reason being that sometimes Third-party Shortening services may be temporarily unavailable now, but responsive next time we try. 
 
-*unshortenAll()*
+>_Considering addressing configuration of this behavior in future releases._
+
+**unshortenAll()**
 
 Takes a single String OR List of Strings representing 1 - n Shortened URLs and returns a Map of Maps with their Unshortened versions, keyed by the ShortURL(s) passed into the method
 
 [TODO: Provide Example]
 
-*expandUrlsInText()*
+**expandUrlsInText()**
 
 Takes a String representing a block of text and replaces all URL occurrences with their Unshortened versions
 
 [TODO: Provide Example]
 
-*expandUrlsInTextAll()*
+**expandUrlsInTextAll()**
 
 Takes a single String or List of Strings representing a block of text and replaces all URL occurrences with their Unshortened versions returning a Map of Maps with the fullText keyed by the shortText
 
@@ -290,9 +293,9 @@ Feel free to contact me by email (jonathan.griggs at gmail.com) or follow me on 
 * Support for 3 new configuration options:
 
 
-    unshorten.ajax.forward.html  = [controller:myController, action:'myAction']
-    unshorten.ajax.forward.json   = [controller:myController, action:'myAction']
-    unshorten.ajax.forward.xml    = [controller:myController, action:'myAction']
+           unshorten.ajax.forward.html   = [controller:'myController', action:'myAction']
+           unshorten.ajax.forward.json   = [controller:'myController', action:'myAction']
+           unshorten.ajax.forward.xml    = [controller:'myController', action:'myAction']
 
 These can be (optionally) set to a map with the 'controller' and 'action' in your application to forward the results of the Unshorten AJAX action. By specifying these options you can process or style the data before returning it to the browser.
 
