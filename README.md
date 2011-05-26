@@ -1,17 +1,7 @@
-# Unshorten - URL Expander Plugin for Grails v.1.0.4
 
-* [Description](#description)
-* [Installation](#installation)
-* [Configuration](#configuration)
-* [UnshortenService](#service)
-* [UnshortenTagLib](#taglib)
-* [UnshortenController](#controller)
-* [Source Code](#source)
-* [Issues](#issues)
-* [Contact](#contact)
-* [Change Log](#changelog)
+# Unshorten - URL Expander Plugin for Grails
 
-## <a id="description">Description</a>
+## Description
 
 The Unshorten plugin provides a means for your Grails application to expand Shortened URLs (http://bit.ly/jkD0Qr and http://tinyurl.com/3vy9xga, for example)
 into their Original, Unshortened form (http://amazon.com or http://grails.org, for example) without the need for calling a Third-Party API.
@@ -22,13 +12,17 @@ Backed by a configurable Least-Recently-Used (LRU) Cache, the Unshorten plugin o
 
 Contains service calls and controller actions to dynamically handle single or multiple URLs as well as GSP Tags to unshorten URLs within blocks of text, and to create links
 
-## <p id="installation">Installation</p>
+## Installation
 
 Enter your application directory and run the following from the command line: 
 
     grails install-plugin unshorten
 
-## <p id="configuration">Configuration</p>
+After you have installed the Unshorten plugin in your application, I'd recommend you point your browser to the Plugin test page to verify all is working and familiarize yourself with the functionality it provides:
+
+    http://localhost:8080/myAppContext/unshorten
+
+## Configuration
 
 The UnshortenPlugin may be configured with several parameters, all specified in your application's */grails-app/conf/Config.groovy*
 
@@ -132,7 +126,7 @@ Example action in your own MyCustomController.groovy:
         
         render(text: result, contentType:"text/xml", encoding:"UTF-8")
     }
-# <p id="service">UnshortenService</p>
+# UnshortenService
 
 ## Services
 ***
@@ -240,7 +234,7 @@ _Returns_
 
 [TODO: Provide Sample Data]
 
-# <p id="taglib">UnshortenTagLib</p>
+# UnshortenTagLib
 
 ## Tags
 
@@ -398,7 +392,7 @@ OR the following XML:
     </response>
 
 
-## <p id="plugins">Other plugins</p>
+## Other plugins
 
 [urlreversi: Revert your shortened URLs](http://grails.org/plugin/urlreversi)
 
@@ -406,7 +400,7 @@ The urlreversi plugin has been around for quite a while longer than Unshorten an
 
 While it does not feature a Caching implementation as far as I can tell, it should not be too difficult to implement your own cache around its functionality.
 
-## <p id="source">Source Code @ GitHub</p>
+## Source Code @ GitHub
 
 The source code is available on GitHub at [https://github.com/boatmeme/grails-unshorten](https://github.com/boatmeme/grails-unshorten). 
 
@@ -414,17 +408,17 @@ Find a bug? Fork it. Fix it. Issue a pull request.
 
 Contributions welcome!
 
-## <p id="issues">Issue Tracking @ GitHub</p>
+## Issue Tracking @ GitHub
 
 Issue tracking is also on GitHub at [https://github.com/boatmeme/grails-unshorten/issues](https://github.com/boatmeme/grails-unshorten/issues).
 
 Bug reports, Feature requests, and general inquiries welcome.
 
-## <p id="contact">Contact</p>
+## Contact
 
 Feel free to contact me by email (jonathan.griggs at gmail.com) or follow me on GitHub at [https://github.com/boatmeme](https://github.com/boatmeme).
 
-# <p id="changelog">Change Log</p>
+# Change Log
 
 ## v1.0.4 - 2011.05.26
 
