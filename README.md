@@ -125,7 +125,6 @@ _results in_
 
 _results in_
 
-
     I just tweeted this URL so you could see it 
     <a class="myLinkClass" href="http://www.cbsnews.com/8301-503543_162-20063168-503543.html">
         http://www.cbsnews.com/8301-503543_162-20063168-503543.html 
@@ -138,12 +137,12 @@ _results in_
 **unshortenUrl**
 
 
-`<unshorten:unshortenUrl url='http://bit.ly/jkD0Qr'/>`
+    <unshorten:unshortenUrl url='http://bit.ly/jkD0Qr'/>
 
 _results in_
 
 
-`http://www.cbsnews.com/8301-503543_162-20063168-503543.html` 
+    http://www.cbsnews.com/8301-503543_162-20063168-503543.html
 
 
 **unshortenAndLinkUrl**
