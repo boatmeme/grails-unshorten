@@ -124,35 +124,39 @@ class UnshortenController {
                 forward(action:ajaxHtmlForward.action,controller:ajaxHtmlForward.controller,model:[unshortenResponse:responseObj])
             }
         } else {
-            def writer = new StringWriter() 
-            new MarkupBuilder(writer).response {
-                    status_code(responseObj."status_code")
-                    status_text(responseObj."status_text")
-                    errors {
-                        for(e in responseObj."errors") {
-                            error(e)
+            def b = new groovy.xml.StreamingMarkupBuilder()
+            b.encoding = "UTF-8"
+            def xml = b.bind {
+                    mkp.xmlDeclaration()
+                    response {
+                        status_code(responseObj."status_code")
+                        status_text(responseObj."status_text")
+                        errors {
+                            for(e in responseObj."errors") {
+                                error(e)
+                            }
                         }
-                    }
-                    data {
-                        for(datum in responseObj."data") {
-                            entry {
-                                type(datum."type")
-                                if(datum."type"=="url") {
-                                    shortUrl(datum."shortUrl")
-                                    fullUrl(datum."fullUrl")
-                                    status(datum."status")
-                                    cached(datum."cached")
-                                } else if(datum."type"=="text") {
-                                    shortText(datum."shortText")
-                                    fullText(datum."fullText")
+                        data {
+                            for(datum in responseObj."data") {
+                                entry {
+                                    type(datum."type")
+                                    if(datum."type"=="url") {
+                                        shortUrl(datum."shortUrl")
+                                        fullUrl(datum."fullUrl")
+                                        status(datum."status")
+                                        cached(datum."cached")
+                                    } else if(datum."type"=="text") {
+                                        shortText(datum."shortText")
+                                        fullText(datum."fullText")
+                                    }
                                 }
                             }
                         }
+                        elapsedTime(System.currentTimeMillis()-startTime)
                     }
-                    elapsedTime(System.currentTimeMillis()-startTime)
             }
             if(!ajaxXmlForward?.action||!ajaxXmlForward?.controller) {
-                render(text: writer.toString(),contentType:'text/xml') 
+                render(text: xml.toString(),contentType:'text/xml') 
             } else {
                 forward(action:ajaxXmlForward.action,controller:ajaxXmlForward.controller,model:[unshortenResponse:writer.toString()])
             }
