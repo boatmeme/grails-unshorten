@@ -59,18 +59,28 @@ _Defaults to 1000 milliseconds_
 
 >_If you're returning many Unshortened urls with a status of 'TIMED\_OUT' you may try increasing this setting_
 
-## UnshortenService
+# UnshortenService
 
-**unshorten()**
+## Services
+***
+### unshorten()
 
 Takes a single String and returns a Map representing the Unshortened URL and ancillary data regarding its HTTP and caching statuses
 
+_Parameters_
+
+* a String - the URL to unshorten
+
+_Returns_
+
+* A Map
+
 The values in the `returnMap` are as follows:
 
-* **returnMap.shortUrl** = the original URL
-* **returnMap.fullUrl** = the unshortened URL
-* **returnMap.cached** = A boolean that is true if the shortenUrl was retrieved from the cache, and false if HTTP rigamarole was required
-* **returnMap.status** = A String, the state of the URL and one of the following possible values:
+* **returnMap.shortUrl** - the original URL
+* **returnMap.fullUrl** - the unshortened URL
+* **returnMap.cached** - A boolean that is true if the shortenUrl was retrieved from the cache, and false if HTTP rigamarole was required
+* **returnMap.status** - A String, the state of the URL and one of the following possible values:
      * `UNSHORTENED` - successfully unshortened
      * `NOT_SHORTENED` - URL was already expanded, i.e. no redirect required
      * `REDIRECTED` - URL was redirected internal to the TLD of the original URL
@@ -83,28 +93,63 @@ The values in the `returnMap` are as follows:
 
 >_Considering addressing configuration of this behavior in future releases._
 
-**unshortenAll()**
+***
+### unshortenAll()
 
 Takes a single String OR List of Strings representing 1 - n Shortened URLs and returns a Map of Maps with their Unshortened versions, keyed by the ShortURL(s) passed into the method
 
-[TODO: Provide Example]
+_Parameters_
 
-**expandUrlsInText()**
+* a String - a single URL to unshorten
+
+_OR_
+
+* a List of Strings - 1 or more URLs to Unshorten
+
+_Returns_
+
+ * a Map of Maps - The returnMap's values match those from the single unshorten() method, but keyed by the corresponding originalUrl passed in as a parameter.
+
+[TODO: Provide Sample Data]
+
+***
+### expandUrlsInText()
 
 Takes a String representing a block of text and replaces all URL occurrences with their Unshortened versions
 
-[TODO: Provide Example]
+_Parameters_
 
-**expandUrlsInTextAll()**
+* a String - a block of text containing 1 - n potentially shortened URLs
+
+_Returns_
+
+* a String - the block of text with all URLs replaced by their Unshortened counterparts
+
+[TODO: Provide Sample Data]
+***
+###expandUrlsInTextAll()
 
 Takes a single String or List of Strings representing a block of text and replaces all URL occurrences with their Unshortened versions returning a Map of Maps with the fullText keyed by the shortText
 
-[TODO: Provide Example]
+_Parameters_
 
-## UnshortenTagLib
+* a String - a block of text containing 1 - n potentially shortened URLs
 
-**expandUrls**
+_OR_
 
+* a List of Strings - 1 or more blocks of text containing 1 - n potentially shortened URLs
+
+_Returns_
+
+ * a Map of Maps - The returnMap's values match those from the single expandUrlsInTextAll() method, but keyed by the corresponding originalTextBlock passed in as a parameter.
+
+[TODO: Provide Sample Data]
+
+# UnshortenTagLib
+
+## Tags
+***
+### expandUrls
 
     <unshorten:expandUrls>
         I just tweeted this URL so you could see it http://bit.ly/jkD0Qr, 
@@ -116,8 +161,8 @@ _results in_
 
     I just tweeted this URL so you could see it http://www.cbsnews.com/8301-503543_162-20063168-503543.html 
     and also this one http://iamthetrend.com/2011/02/10/10-examples-of-awesome-indie-clothing-look-books/
-
-**expandAndLinkUrls**
+***
+### expandAndLinkUrls
 
 
     <unshorten:expandAndLinkUrls linkClass="myLinkClass">
@@ -135,8 +180,8 @@ _results in_
     <a class="myLinkClass" href="http://iamthetrend.com/2011/02/10/10-examples-of-awesome-indie-clothing-look-books/">
        http://iamthetrend.com/2011/02/10/10-examples-of-awesome-indie-clothing-look-books/
     </a>
-
-**unshortenUrl**
+***
+### unshortenUrl
 
 
     <unshorten:unshortenUrl url='http://bit.ly/jkD0Qr'/>
@@ -146,8 +191,8 @@ _results in_
 
     http://www.cbsnews.com/8301-503543_162-20063168-503543.html
 
-
-**unshortenAndLinkUrl**
+***
+### unshortenAndLinkUrl
 
 
     <unshorten:unshortenAndLinkUrl class="myLinkClass" url='http://bit.ly/jkD0Qr'/>
@@ -161,27 +206,30 @@ _results in_
     </a>
 
 
-## UnshortenController
+# UnshortenController
 
-### Actions
+## Actions
 
-#### /unshorten/
+***
+### /unshorten/
 
 Provides a test form for validating the functionality of the Unshorten plugin and testing individual URLs. May serve as a template for your own application.
+***
+### /unshorten/ajax
 
-#### /unshorten/ajax - AJAX
+ AJAX Action, accepts params and returns an HTML fragment, JSON, or XML
 
-Parameters
+_Parameters_
 
 * **shortUrl** - one or more URLs
 * **shortText** - one or more blocks of text that may contain shortened links (i.e. Tweets)
-* **format** - `json` or `xml`. Determines the format of the response. Defaults to `json`.
+* **format** - `json`, `xml`, or `html`. Determines the format of the response. Defaults to `json`.
 
 > _At least 1 shortUrl OR shortText must be supplied, or the response will return a 500 status\_code_
 
 For example, doing an HTTP GET on this URL:
 
-`app-context/unshorten/ajax?shortUrl=http://bit.ly/jkD0Qr&shortUrl=http://t.co/8lrqrZf&shortText=Tweet!%20http://bit.ly/11Da1f`
+    app-context/unshorten/ajax?shortUrl=http://bit.ly/jkD0Qr&shortUrl=http://t.co/8lrqrZf&shortText=Tweet!%20http://bit.ly/11Da1f
 
 might return the following JSON:
 
