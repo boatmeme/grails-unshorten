@@ -37,6 +37,7 @@ import groovy.xml.MarkupBuilder
  */
 class UnshortenController {
     def unshortenService
+    def grailsApplication
     
     def ajaxXmlForward = grailsApplication?.config?.unshorten?.ajax?.forward?.xml
     def ajaxJsonForward = grailsApplication?.config?.unshorten?.ajax?.forward?.json
