@@ -157,6 +157,15 @@ The values in the `returnMap` are as follows:
 
 >_Considering addressing configuration of this behavior in future releases._
 
+Example:
+
+    def shortUrl = "http://bit.ly/jkD0Qr"
+    unshortenService?.unshorten(shortUrl)
+
+_returns_
+
+    [fullUrl:http://www.cbsnews.com/8301-503543_162-20063168-503543.html, status:UNSHORTENED, shortUrl:http://bit.ly/jkD0Qr, cached:false]
+
 ***
 ### unshortenAll()
 
@@ -174,7 +183,14 @@ _Returns_
 
  * a Map of Maps - The returnMap's values match those from the single unshorten() method, but keyed by the corresponding originalUrl passed in as a parameter.
 
-[TODO: Provide Sample Data]
+Example:
+
+    def shortUrls = ["http://bit.ly/jkD0Qr","http://minu.me/4fmw"]
+    unshortenService?.unshortenAll(shortUrls)
+
+_returns_
+
+    [http://bit.ly/jkD0Qr:[fullUrl:http://www.cbsnews.com/8301-503543_162-20063168-503543.html, status:UNSHORTENED, shortUrl:http://bit.ly/jkD0Qr, cached:false],http://minu.me/4fmw:[fullUrl:http://www.twitcaps.com/search?q=dsk, status:UNSHORTENED, shortUrl:http://minu.me/4fmw, cached:false]]
 
 ***
 ### expandUrlsInText()
@@ -189,7 +205,13 @@ _Returns_
 
 * a String - the block of text with all URLs replaced by their Unshortened counterparts
 
-[TODO: Provide Sample Data]
+    def shortUrl = "Check out these links! http://bit.ly/jkD0Qr and http://minu.me/4fmw"
+    unshortenService?.unshorten(shortUrl)
+
+_returns_
+
+     Check out these links! http://www.cbsnews.com/8301-503543_162-20063168-503543.html and http://www.twitcaps.com/search?q=dsk
+
 ***
 ###expandUrlsInTextAll()
 
