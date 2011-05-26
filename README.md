@@ -1,4 +1,3 @@
-
 # Unshorten - URL Expander Plugin for Grails
 
 
@@ -291,9 +290,9 @@ Feel free to contact me by email (jonathan.griggs at gmail.com) or follow me on 
 * Support for 3 new configuration options:
 
 
-   `unshorten.ajax.forward.html  = [controller:myController, action:'myAction']
-   unshorten.ajax.forward.json   = [controller:myController, action:'myAction']
-   unshorten.ajax.forward.xml    = [controller:myController, action:'myAction']`
+    unshorten.ajax.forward.html  = [controller:myController, action:'myAction']
+    unshorten.ajax.forward.json   = [controller:myController, action:'myAction']
+    unshorten.ajax.forward.xml    = [controller:myController, action:'myAction']
 
 These can be (optionally) set to a map with the 'controller' and 'action' in your application to forward the results of the Unshorten AJAX action. By specifying these options you can process or style the data before returning it to the browser.
 
