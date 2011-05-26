@@ -1,4 +1,3 @@
-
 # Unshorten - URL Expander Plugin for Grails v.1.0.4
 
 * [Description](#description)
@@ -12,7 +11,7 @@
 * [Contact](#contact)
 * [Change Log](#changelog)
 
-## <p id="description">Description</p>
+## <a id="description">Description</a>
 
 The Unshorten plugin provides a means for your Grails application to expand Shortened URLs (http://bit.ly/jkD0Qr and http://tinyurl.com/3vy9xga, for example)
 into their Original, Unshortened form (http://amazon.com or http://grails.org, for example) without the need for calling a Third-Party API.
