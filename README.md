@@ -189,7 +189,7 @@ For example, doing an HTTP GET on this URL:
 
 might return the following JSON:
 
-{code}
+`
 {
   "status_code":"200",
   "status_text":"OK",
@@ -218,55 +218,71 @@ might return the following JSON:
             }
         ]
 }
-{code}
+`
 
 OR the following XML:
 
-{code}
-<response>
-    <status_code>200</status_code>
-    <status_text>OK</status_text>
-    <errors />
-    <data>
-        <entry>
-            <type>url</type>
-            <shortUrl>http://t.co/8lrqrZf</shortUrl>
-            <fullUrl>
-                 http://iamthetrend.com/2011/02/10/10-examples-of-awesome-indie-clothing-look-books/
-            </fullUrl>
-            <status>UNSHORTENED</status>
-            <cached>false</cached>
-        </entry>
-        <entry>
-            <type>url</type>
-            <shortUrl>http://bit.ly/jkD0Qr</shortUrl>
-            <fullUrl>
-                http://www.cbsnews.com/8301-503543_162-20063168-503543.html
-             </fullUrl>
-            <status>UNSHORTENED</status>
-            <cached>false</cached>
-        </entry>
-        <entry>
-            <type>text</type>
-            <shortText>Tweet! http://bit.ly/11Da1f</shortText>
-            <fullText>Tweet! http://twitcaps.com/</fullText>
-        </entry>
-    </data>
-    <elapsedTime>91</elapsedTime>
-</response>
-{code}
+ 
+    <response>
+        <status_code>200</status_code>
+        <status_text>OK</status_text>
+        <errors />
+        <data>
+            <entry>
+                <type>url</type>
+                <shortUrl>http://t.co/8lrqrZf</shortUrl>
+                <fullUrl>
+                     http://iamthetrend.com/2011/02/10/10-examples-of-awesome-indie-clothing-look-books/
+                </fullUrl>
+                <status>UNSHORTENED</status>
+                <cached>false</cached>
+            </entry>
+            <entry>
+                <type>url</type>
+                <shortUrl>http://bit.ly/jkD0Qr</shortUrl>
+                <fullUrl>
+                    http://www.cbsnews.com/8301-503543_162-20063168-503543.html
+                 </fullUrl>
+                <status>UNSHORTENED</status>
+                <cached>false</cached>
+            </entry>
+            <entry>
+                <type>text</type>
+                <shortText>Tweet! http://bit.ly/11Da1f</shortText>
+                <fullText>Tweet! http://twitcaps.com/</fullText>
+            </entry>
+        </data>
+        <elapsedTime>91</elapsedTime>
+    </response>
 
-h2. Other plugins
 
-[urlreversi: Revert your shortened URLs|http://grails.org/plugin/urlreversi]
+## Other plugins
+
+[urlreversi: Revert your shortened URLs](http://grails.org/plugin/urlreversi)
 
 The urlreversi plugin has been around for quite a while longer than Unshorten and provides the basic functionality of Unshortening (shortUrl-in / fullUrl-out) in a Service as well as a TagLib for convenience.
 
 While it does not feature a Caching implementation as far as I can tell, it should not be too difficult to implement your own cache around its functionality.
 
-h2. Contact
+# Contact
 
-Soon, JIRA and Source links
+## Source Code @ GitHub
+
+The source code is available on GitHub at [https://github.com/boatmeme/grails-unshorten](https://github.com/boatmeme/grails-unshorten). 
+
+Find a bug? Fork it. Fix it. Issue a pull request.
+
+Contributions welcome!
+
+## Issue Tracking @ GitHub
+
+Issue tracking is also on GitHub at [https://github.com/boatmeme/grails-unshorten/issues](https://github.com/boatmeme/grails-unshorten/issues).
+
+Bug reports, Feature requests, and general inquiries welcome.
+
+## Contact
+
+Feel free to contact me by email (jonathan.griggs at gmail.com) or follow me GitHub at [https://github.com/boatmeme](https://github.com/boatmeme).
 
 # Change Log
 
@@ -280,11 +296,12 @@ Soon, JIRA and Source links
 * Fixed bug where URL Status was being set to UNKNOWN when it should be set to TIMED_OUT
 * AJAX response can now return HTML
 * AJAX format parameter supports 'html' value
-* Support for 3 new Configuration options:
+* Support for 3 new configuration options:
 
-   unshorten.ajax.forward.html  = [controller:myController, action:'myAction']
-   unshorten.ajax.forward.json  = [controller:myController, action:'myAction']
-   unshorten.ajax.forward.xml   = [controller:myController, action:'myAction']
+
+   `unshorten.ajax.forward.html  = [controller:myController, action:'myAction']
+   unshorten.ajax.forward.json   = [controller:myController, action:'myAction']
+   unshorten.ajax.forward.xml    = [controller:myController, action:'myAction']`
 
 These can be (optionally) set to a map with the 'controller' and 'action' in your application to forward the results of the Unshorten AJAX action. By specifying these options you can process or style the data before returning it to the browser.
 
