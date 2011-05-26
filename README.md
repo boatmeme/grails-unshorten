@@ -99,126 +99,121 @@ Takes a single String or List of Strings representing a block of text and replac
 
 [TODO: Provide Example]
 
-h2. UnshortenTagLib
+## UnshortenTagLib
 
-*expandUrls*
+**expandUrls**
 
-{code}
-<unshorten:expandUrls>
+
+    <unshorten:expandUrls>
         I just tweeted this URL so you could see it http://bit.ly/jkD0Qr, 
         and also this one http://t.co/8lrqrZf
-</unshorten:expandUrls>
-{code}
+    </unshorten:expandUrls>
 
-outputs
 
-{code}
-I just tweeted this URL so you could see it http://www.cbsnews.com/8301-503543_162-20063168-503543.html 
-and also this one http://iamthetrend.com/2011/02/10/10-examples-of-awesome-indie-clothing-look-books/
-{code}
+_results in_
 
-*expandAndLinkUrls*
+    I just tweeted this URL so you could see it http://www.cbsnews.com/8301-503543_162-20063168-503543.html 
+    and also this one http://iamthetrend.com/2011/02/10/10-examples-of-awesome-indie-clothing-look-books/
 
-{code}
-<unshorten:expandAndLinkUrls linkClass="myLinkClass">
+**expandAndLinkUrls**
+
+
+    <unshorten:expandAndLinkUrls linkClass="myLinkClass">
         I just tweeted this URL so you could see it http://bit.ly/jkD0Qr, 
         and also this one http://t.co/8lrqrZf
-</unshorten:expandAndLinkUrls>
-{code}
+    </unshorten:expandAndLinkUrls>
 
-outputs
+_results in_
 
-{code}
-I just tweeted this URL so you could see it 
-<a class="myLinkClass" href="http://www.cbsnews.com/8301-503543_162-20063168-503543.html">
-http://www.cbsnews.com/8301-503543_162-20063168-503543.html 
-</a>
-and also this one 
-<a class="myLinkClass" href="http://iamthetrend.com/2011/02/10/10-examples-of-awesome-indie-clothing-look-books/">
-   http://iamthetrend.com/2011/02/10/10-examples-of-awesome-indie-clothing-look-books/
-</a>
-{code}
 
-*unshortenUrl*
+    I just tweeted this URL so you could see it 
+    <a class="myLinkClass" href="http://www.cbsnews.com/8301-503543_162-20063168-503543.html">
+        http://www.cbsnews.com/8301-503543_162-20063168-503543.html 
+    </a>
+    and also this one 
+    <a class="myLinkClass" href="http://iamthetrend.com/2011/02/10/10-examples-of-awesome-indie-clothing-look-books/">
+       http://iamthetrend.com/2011/02/10/10-examples-of-awesome-indie-clothing-look-books/
+    </a>
 
-{code}
-<unshorten:unshortenUrl url='http://bit.ly/jkD0Qr'/>
-{code}
+**unshortenUrl**
 
-outputs
 
-{code}
-http://www.cbsnews.com/8301-503543_162-20063168-503543.html 
-{code}
+`<unshorten:unshortenUrl url='http://bit.ly/jkD0Qr'/>`
 
-*unshortenAndLinkUrl*
+_results in_
 
-{code}
-<unshorten:unshortenAndLinkUrl class="myLinkClass" url='http://bit.ly/jkD0Qr'/>
-{code}
 
-outputs
+`http://www.cbsnews.com/8301-503543_162-20063168-503543.html` 
 
-{code}
-<a class="myLinkClass" href="http://www.cbsnews.com/8301-503543_162-20063168-503543.html">
-http://www.cbsnews.com/8301-503543_162-20063168-503543.html 
-</a>
-{code}
 
-h2. UnshortenController
+**unshortenAndLinkUrl**
 
-h3. Actions
 
-h4. /unshorten/index 
+    <unshorten:unshortenAndLinkUrl class="myLinkClass" url='http://bit.ly/jkD0Qr'/>
+
+
+_results in_
+
+
+    <a class="myLinkClass" href="http://www.cbsnews.com/8301-503543_162-20063168-503543.html">
+        http://www.cbsnews.com/8301-503543_162-20063168-503543.html 
+    </a>
+
+
+## UnshortenController
+
+### Actions
+
+#### /unshorten/
 
 Provides a test form for validating the functionality of the Unshorten plugin and testing individual URLs. May serve as a template for your own application.
 
-h4. /unshorten/ajax - AJAX
+#### /unshorten/ajax - AJAX
 
-*Parameters*
+Parameters
 
-* *shortUrl* - one or more URLs
-* *shortText* - one or more blocks of text that may contain shortened links (i.e. Tweets)
-* *format* - 'json' or 'xml'. Determines the format of the response. Defaults to json.
+* **shortUrl** - one or more URLs
+* **shortText** - one or more blocks of text that may contain shortened links (i.e. Tweets)
+* **format** - `json` or `xml`. Determines the format of the response. Defaults to `json`.
 
-{warning}At least 1 shortUrl OR shortText must be supplied, or the response will return a 500 status_code{warning}
+> _At least 1 shortUrl OR shortText must be supplied, or the response will return a 500 status\_code_
 
 For example, doing an HTTP GET on this URL:
 
-{code}app-context/unshorten/ajax?shortUrl=http://bit.ly/jkD0Qr&shortUrl=http://t.co/8lrqrZf&shortText=Tweet!%20http://bit.ly/11Da1f{code}
+`app-context/unshorten/ajax?shortUrl=http://bit.ly/jkD0Qr&shortUrl=http://t.co/8lrqrZf&shortText=Tweet!%20http://bit.ly/11Da1f`
 
 might return the following JSON:
 
-`
-{
-  "status_code":"200",
-  "status_text":"OK",
-  "elapsedTime":13,
-  "errors":[],
-   "data":
-       [
-           {
-            "cached":false,
-            "fullUrl":"http://iamthetrend.com/2011/02/10/10-examples-of-awesome-indie-clothing-look books/",
-            "status":"UNSHORTENED",
-            "shortUrl":"http://t.co/8lrqrZf"
-            "type":"url"
-           },
-           {
-             "cached":false,
-             "fullUrl":"http://www.cbsnews.com/8301-503543_162-20063168-503543.html",
-             "status":"UNSHORTENED",
-             "shortUrl":"http://bit.ly/jkD0Qr"
-             "type":"url"
-            },
-            {
-             "fullText":"Tweet! http://twitcaps.com",
-             "shortText":"Tweet! http://bit.ly/11Da1f"
-             "type":"text"
-            }
-        ]
-}
-`
+
+    {
+      "status_code":"200",
+      "status_text":"OK",
+      "elapsedTime":13,
+      "errors":[],
+       "data":
+           [
+               {
+                "cached":false,
+                "fullUrl":"http://iamthetrend.com/2011/02/10/10-examples-of-awesome-indie-clothing-look books/",
+                "status":"UNSHORTENED",
+                "shortUrl":"http://t.co/8lrqrZf"
+                "type":"url"
+               },
+               {
+                 "cached":false,
+                 "fullUrl":"http://www.cbsnews.com/8301-503543_162-20063168-503543.html",
+                 "status":"UNSHORTENED",
+                 "shortUrl":"http://bit.ly/jkD0Qr"
+                 "type":"url"
+                },
+                {
+                 "fullText":"Tweet! http://twitcaps.com",
+                 "shortText":"Tweet! http://bit.ly/11Da1f"
+                 "type":"text"
+                }
+            ]
+    }
+
 
 OR the following XML:
 
@@ -264,8 +259,6 @@ The urlreversi plugin has been around for quite a while longer than Unshorten an
 
 While it does not feature a Caching implementation as far as I can tell, it should not be too difficult to implement your own cache around its functionality.
 
-# Contact
-
 ## Source Code @ GitHub
 
 The source code is available on GitHub at [https://github.com/boatmeme/grails-unshorten](https://github.com/boatmeme/grails-unshorten). 
@@ -282,7 +275,7 @@ Bug reports, Feature requests, and general inquiries welcome.
 
 ## Contact
 
-Feel free to contact me by email (jonathan.griggs at gmail.com) or follow me GitHub at [https://github.com/boatmeme](https://github.com/boatmeme).
+Feel free to contact me by email (jonathan.griggs at gmail.com) or follow me on GitHub at [https://github.com/boatmeme](https://github.com/boatmeme).
 
 # Change Log
 
