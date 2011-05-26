@@ -1,3 +1,4 @@
+
 # Unshorten - URL Expander Plugin for Grails
 
 
@@ -267,23 +268,27 @@ h2. Contact
 
 Soon, JIRA and Source links
 
-h1. Change Log
+# Change Log
 
-h2. v1.0.3 - 2011.05.22
+## v1.0.4 - 2011.05.26
+
+* `unshorten.http.readTimeout` property was incorrectly named
+* Cosmetic changes on the test view, `app_context/translate``
+
+## v1.0.3 - 2011.05.22
 
 * Fixed bug where URL Status was being set to UNKNOWN when it should be set to TIMED_OUT
 * AJAX response can now return HTML
 * AJAX format parameter supports 'html' value
-
 * Support for 3 new Configuration options:
 
-{code}unshorten.ajax.forward.html
-unshorten.ajax.forward.json
-unshorten.ajax.forward.xml{code}
+   unshorten.ajax.forward.html  = [controller:myController, action:'myAction']
+   unshorten.ajax.forward.json  = [controller:myController, action:'myAction']
+   unshorten.ajax.forward.xml   = [controller:myController, action:'myAction']
 
 These can be (optionally) set to a map with the 'controller' and 'action' in your application to forward the results of the Unshorten AJAX action. By specifying these options you can process or style the data before returning it to the browser.
 
-h2. v1.0.2 - 2011.05.20
+## v1.0.2 - 2011.05.20
 
 * Added UnshortenService.expandUrlsInTextAll() to take a list of 1 - n text blocks and return the results of expanding all of them
 * AJAX action now supports ‘shortText’ parameter which operates on blocks of text instead of individual urls
@@ -293,13 +298,13 @@ h2. v1.0.2 - 2011.05.20
 * AJAX action now supports ‘format’ parameter which can be either ‘json’ or ‘xml’. Defaults to ‘json’
 * Added UrlStatus Enum to UnshortenService
 
-h2. v1.0.1 - 2011.05.19 
+## v1.0.1 - 2011.05.19 
 
 * Added support for redirects via HTTP 302 and 303 (bad shortener!)
 * Added support for chaining redirects
 * Fixed bug with relative redirects
 * Added status for "redirect"
 
-h2. v1.0 - 2011.05.17
+## v1.0 - 2011.05.17
 
 * Initial release
