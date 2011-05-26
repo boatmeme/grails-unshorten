@@ -1,13 +1,15 @@
 package com.memetix.unshorten
 
-import grails.test.*
+import grails.test.mixin.*
+import static org.junit.Assert.*
+import org.junit.*
 import org.apache.log4j.*
 import grails.converters.JSON
 import grails.converters.XML
 
-class UnshortenControllerTests extends ControllerUnitTestCase {
+@TestFor(UnshortenController)
+class UnshortenControllerTests {
     def controller
-    def unshortenService
     def log
     
     def tcoShortUrl
@@ -54,28 +56,18 @@ class UnshortenControllerTests extends ControllerUnitTestCase {
         tweet2Expanded = "This is a tweet, http://www.careerrocketeer.com/2011/05/are-you-promotable.html 1 http://www.careerrocketeer.com/2011/05/are-you-promotable.html 2 http://www.careerrocketeer.com/2011/05/are-you-promotable.html 3 http://www.careerrocketeer.com/2011/05/are-you-promotable.html 4"    
     }
     
-    protected void setUp() {
-        super.setUp()
-        setupLogger()
+    @Before
+    public void setUp() {
         setupUrls()
         setupTexts()
-        unshortenService = new UnshortenService()
-        controller = new UnshortenController()
-        controller.unshortenService = unshortenService
-    }
-    
-    private setupLogger() {
-        // build a logger...
-        BasicConfigurator.configure() 
-        LogManager.rootLogger.level = Level.DEBUG
-        log = LogManager.getLogger("UnshortenService")
-
-        // use groovy metaClass to put the log into your class
-        UnshortenService.class.metaClass.getLog << {-> log}
+        defineBeans {
+           unshortenService(UnshortenService) 
+        }
     }
 
-    protected void tearDown() {
-        super.tearDown()
+    @After
+    public void tearDown() {
+        
     }
     
     private parseJSONToMap(jsonResponse) {

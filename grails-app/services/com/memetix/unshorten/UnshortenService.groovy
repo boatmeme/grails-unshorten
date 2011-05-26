@@ -28,11 +28,12 @@ enum UrlStatus {UNSHORTENED,NOT_FOUND,REDIRECTED,TIMED_OUT,INVALID,NOT_SHORTENED
  */
 
 class UnshortenService {
+    def grailsApplication
     static transactional = false
     static urlRegex = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])/
-    def maxCacheSize = ConfigurationHolder?.config?.unshorten?.cache?.maxSize ?: 10000
-    def connectTimeoutInMilliseconds = ConfigurationHolder?.config?.unshorten?.http?.connectTimeout ?: 1000
-    def readTimeoutInMilliseconds = ConfigurationHolder?.config?.unshorten?.http?.readTimeout ?: 1000
+    def maxCacheSize = grailsApplication?.config?.unshorten?.cache?.maxSize ?: 10000
+    def connectTimeoutInMilliseconds = grailsApplication?.config?.unshorten?.http?.connectTimeout ?: 1000
+    def readTimeoutInMilliseconds = grailsApplication?.config?.unshorten?.http?.readTimeout ?: 1000
     def cache = new LRUCache(maxCacheSize)
     static scope = "singleton"
     

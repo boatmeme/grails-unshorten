@@ -1,20 +1,22 @@
 package com.memetix.unshorten
 
-import grails.test.*
+import grails.test.mixin.*
+import static org.junit.Assert.*
+import org.junit.*
 
-class LRUCacheTests extends GrailsUnitTestCase {
+class LRUCacheTests  {
     
     def shortUrl
     def fullUrl
     
-    protected void setUp() {
+    @Before
+    public void setUp() {
         shortUrl = "http://test.ly"
         fullUrl = "http://fullexpandedurl"
-        super.setUp()
     }
 
-    protected void tearDown() {
-        super.tearDown()
+    @After
+    public void tearDown() {
     }
 
     void testConstructor() {
