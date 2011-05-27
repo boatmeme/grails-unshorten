@@ -405,6 +405,8 @@ The source code is available on GitHub at [https://github.com/boatmeme/grails-un
 
 Find a bug? Fork it. Fix it. Issue a pull request.
 
+    git clone git://github.com/boatmeme/grails-unshorten
+
 Contributions welcome!
 
 ## Issue Tracking @ GitHub
