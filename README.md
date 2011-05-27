@@ -297,7 +297,7 @@ _results in_
     </a>
 
 
-# <p id="controller">UnshortenController</p>
+# UnshortenController
 
 ## Actions
 
