@@ -16,7 +16,7 @@
 **/
 package com.memetix.unshorten
 
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import org.springframework.beans.factory.InitializingBean 
 
 enum UrlStatus {UNSHORTENED,NOT_FOUND,REDIRECTED,TIMED_OUT,INVALID,NOT_SHORTENED,UNKNOWN}
 /**
@@ -39,18 +39,27 @@ enum UrlStatus {UNSHORTENED,NOT_FOUND,REDIRECTED,TIMED_OUT,INVALID,NOT_SHORTENED
  *      unshorten.http.readTimeout (default 1000) : time in milliseconds defining the maximum time to wait before giving up on socket reads during unshortening a URL (HTTP Read Timeout)
  * 
  * @author Jonathan Griggs  <twitcaps.developer @ gmail.com>
- * @version     1.0.3   2011.05.20                              
+ * @version     1.0.4   2011.05.28                              
  * @since       1.0     2011.05.17                            
  */
 
-class UnshortenService {
+class UnshortenService implements InitializingBean {
+    def grailsApplication
     static transactional = false
     static urlRegex = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])/
-    def maxCacheSize = ConfigurationHolder?.config?.unshorten?.cache?.maxSize ?: 10000
-    def connectTimeoutInMilliseconds = ConfigurationHolder?.config?.unshorten?.http?.connectTimeout ?: 1000
-    def readTimeoutInMilliseconds = ConfigurationHolder?.config?.unshorten?.http?.readTimeout ?: 1000
-    def cache = new LRUCache(maxCacheSize)
+    def maxCacheSize
+    def connectTimeoutInMilliseconds
+    def readTimeoutInMilliseconds
+    def cache
     static scope = "singleton"
+    
+    // Configure vars for Grails 1.4.0 compatibility  (ConfigHolder deprecation)
+    void afterPropertiesSet() { 
+        maxCacheSize = grailsApplication?.config?.unshorten?.cache?.maxSize ?: 10000
+        connectTimeoutInMilliseconds = grailsApplication?.config?.unshorten?.http?.connectTimeout ?: 1000
+        readTimeoutInMilliseconds = grailsApplication?.config?.unshorten?.http?.readTimeout ?: 1000
+        cache = new LRUCache(maxCacheSize)
+     } 
     
     /**
      * unshorten()                         

@@ -76,6 +76,7 @@ class UnshortenControllerTests extends ControllerUnitTestCase {
         setupUrls()
         setupTexts()
         unshortenService = new UnshortenService()
+        unshortenService.afterPropertiesSet()
         controller = new UnshortenController()
         controller.unshortenService = unshortenService
         controller.response.setCharacterEncoding("UTF-8") 

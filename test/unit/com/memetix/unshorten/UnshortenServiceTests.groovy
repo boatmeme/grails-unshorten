@@ -26,6 +26,7 @@ class UnshortenServiceTests extends GrailsUnitTestCase {
     protected void setUp() {
         setupLogger()
         unshortenService = new UnshortenService()
+        unshortenService.afterPropertiesSet()
         super.setUp()
     }
 
